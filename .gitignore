@@ -1,0 +1,152 @@
+﻿
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options
+.vs/
+
+# Rider IDE
+.idea/
+*.sln.iml
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# DotCover
+.idea/.idea.DotSettings
+
+# Publish outputs
+publish/
+*.[Pp]ublish.xml
+*.azurePubxml
+*.pubxml
+*.publishproj
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+!**/[Pp]ackages/src/
+
+# Windows/Mac/Linux OS junk
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+.AppleDouble
+.LSOverride
+*~
+
+# Logs
+*.log
+logs/
+log/
+
+# Environment
+.env
+.env.*
+
+# Coverage / Test results
+coverage/
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+## ------------------------
+## Docker-specific
+## ------------------------
+docker-compose.override.yml
+docker-compose.local.yml
+.docker/
+.dockerignore
+
+## ------------------------
+## PostgreSQL (локальные данные)
+## ------------------------
+pgdata/
+postgres-data/
+**/pgdata/
+**/postgres-data/
+
+*.sql
+*.dump
+*.backup
+
+## ------------------------
+## Redis (локальные данные)
+## ------------------------
+redis-data/
+**/redis-data/
+dump.rdb
+appendonly.aof
+
+## ------------------------
+## Frontend (React/Vue/Angular)
+## ------------------------
+node_modules/
+dist/
+build/
+.cache/
+.npm/
+.yarn/
+.pnp/
+.pnp.js
+coverage/
+*.tsbuildinfo
+.vscode/
+*.local
+*.local.*
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# Vue-specific
+*.cache
+.vuepress/dist
+.vite/
+vite.config.ts.timestamp-*
+
+# Angular-specific
+.angular/
+*.ngsummary.json
+
+## ------------------------
+## CI/CD Configs (чтобы не утекли чувствительные файлы)
+## ------------------------
+# GitHub Actions secrets или временные артефакты
+.github/secrets/
+.github/workflows/temp-*.yml
+
+# Azure DevOps
+.azure-pipelines.local.yml
+azure-pipelines.secret.yml
+
+# CI Build artifacts
+artifacts/
+*.artifact
+*.artifact.zip
