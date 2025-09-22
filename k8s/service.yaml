@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: docker-basics
+  labels:
+    app: docker-basics
+spec:
+  type: ClusterIP
+  selector:
+    app: docker-basics
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080

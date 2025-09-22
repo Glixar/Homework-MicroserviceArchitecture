@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-basics
+  labels:
+    app: docker-basics
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: docker-basics
+  template:
+    metadata:
+      labels:
+        app: docker-basics
+    spec:
+      containers:
+        - name: app
+          image: docker.io/glixar/docker-basics:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            - name: ASPNETCORE_URLS
+              value: http://0.0.0.0:8080
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
