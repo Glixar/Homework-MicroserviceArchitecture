@@ -1,14 +1,22 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: docker-basics
+  name: health-service
+  namespace: glixar-demo
   labels:
-    app: docker-basics
+    app: health-service
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8081"
 spec:
   type: ClusterIP
   selector:
-    app: docker-basics
+    app: health-service
   ports:
     - name: http
       port: 80
       targetPort: 8080
+      appProtocol: http
+    - name: metrics
+      port: 8081
+      targetPort: 8081

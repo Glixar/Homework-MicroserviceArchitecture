@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{08363347-E14
 		k8s\deployment.yaml = k8s\deployment.yaml
 		k8s\ingress.yaml = k8s\ingress.yaml
 		k8s\service.yaml = k8s\service.yaml
+		k8s\kustomization.yaml = k8s\kustomization.yaml
+		k8s\namespace.yaml = k8s\namespace.yaml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthService", "src\HealthService\HealthService.csproj", "{AC94CA28-4D9B-4DE9-B821-B666F5BC8869}"
