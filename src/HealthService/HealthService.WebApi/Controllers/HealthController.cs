@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HealthService.Controllers;
+namespace HealthService.WebApi.Controllers;
 
 [ApiController]
 [Route("/")]

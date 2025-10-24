@@ -1,4 +1,4 @@
-namespace HealthService;
+namespace HealthService.WebApi;
 
 public abstract class Program()
 {

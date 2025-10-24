@@ -16,7 +16,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{08363347-E14
 		k8s\namespace.yaml = k8s\namespace.yaml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthService", "src\HealthService\HealthService.csproj", "{AC94CA28-4D9B-4DE9-B821-B666F5BC8869}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HealthService", "HealthService", "{997C4041-1735-4845-B697-697AAD81F5AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthService.WebApi", "src\HealthService\HealthService.WebApi\HealthService.WebApi.csproj", "{160D1FD6-47C0-4E5C-841E-A2DC0850B6B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,12 +26,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{AC94CA28-4D9B-4DE9-B821-B666F5BC8869} = {FF150A4D-F330-4882-B4F0-AC003ED9018D}
+		{997C4041-1735-4845-B697-697AAD81F5AB} = {FF150A4D-F330-4882-B4F0-AC003ED9018D}
+		{160D1FD6-47C0-4E5C-841E-A2DC0850B6B9} = {997C4041-1735-4845-B697-697AAD81F5AB}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AC94CA28-4D9B-4DE9-B821-B666F5BC8869}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC94CA28-4D9B-4DE9-B821-B666F5BC8869}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC94CA28-4D9B-4DE9-B821-B666F5BC8869}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC94CA28-4D9B-4DE9-B821-B666F5BC8869}.Release|Any CPU.Build.0 = Release|Any CPU
+		{160D1FD6-47C0-4E5C-841E-A2DC0850B6B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{160D1FD6-47C0-4E5C-841E-A2DC0850B6B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{160D1FD6-47C0-4E5C-841E-A2DC0850B6B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{160D1FD6-47C0-4E5C-841E-A2DC0850B6B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
