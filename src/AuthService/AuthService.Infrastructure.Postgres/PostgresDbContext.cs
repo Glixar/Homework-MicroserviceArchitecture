@@ -3,24 +3,36 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthService.Infrastructure.Postgres;
 
-public class PostgresDbContext : DbContext
+/// <summary>
+/// EF Core контекст для работы с PostgreSQL.
+/// </summary>
+public sealed class PostgresDbContext : DbContext
 {
     /// <summary>
-    /// Контекст EF Core для работы с таблицей пользователей.
+    /// Конструктор контекста.
     /// </summary>
-    public PostgresDbContext(DbContextOptions<PostgresDbContext> options)
-        : base(options)
+    public PostgresDbContext(DbContextOptions<PostgresDbContext> options) : base(options)
     {
     }
+
     /// <summary>
     /// Набор пользователей.
     /// </summary>
     public DbSet<User> Users => Set<User>();
 
+    /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
+        ConfigureUsers(modelBuilder);
+    }
+
+    /// <summary>
+    /// Конфигурация сущности пользователя.
+    /// </summary>
+    private static void ConfigureUsers(ModelBuilder modelBuilder)
+    {
         var user = modelBuilder.Entity<User>();
 
         user.ToTable("users");
@@ -30,6 +42,10 @@ public class PostgresDbContext : DbContext
         user.Property(x => x.Id)
             .HasColumnName("id")
             .ValueGeneratedOnAdd();
+
+        user.Property(x => x.UserName)
+            .HasColumnName("user_name")
+            .IsRequired();
 
         user.Property(x => x.FirstName)
             .HasColumnName("first_name")
