@@ -7,6 +7,11 @@ namespace AuthService.Contracts.Users;
 /// </summary>
 public sealed class UpdateUserRequest
 {
+    // Логин / имя пользователя
+    [Required(ErrorMessage = "Логин обязателен.")]
+    [MaxLength(50, ErrorMessage = "Максимальная длина логина — 50 символов.")]
+    public string UserName { get; init; } = default!;
+
     // Имя
     [Required(ErrorMessage = "Имя обязательно.")]
     [MaxLength(100, ErrorMessage = "Максимальная длина имени — 100 символов.")]
@@ -22,4 +27,9 @@ public sealed class UpdateUserRequest
     [EmailAddress(ErrorMessage = "Некорректный формат E-mail.")]
     [MaxLength(255, ErrorMessage = "Максимальная длина E-mail — 255 символов.")]
     public string Email { get; init; } = default!;
+
+    // Телефон
+    [Required(ErrorMessage = "Телефон обязателен.")]
+    [MaxLength(50, ErrorMessage = "Максимальная длина телефона — 50 символов.")]
+    public string Phone { get; init; } = default!;
 }

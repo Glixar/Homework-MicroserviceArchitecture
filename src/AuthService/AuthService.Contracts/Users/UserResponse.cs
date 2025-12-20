@@ -19,4 +19,7 @@ public sealed class UserResponse
 
     // Почта
     public string Email { get; init; } = default!;
+
+    // Телефон
+    public string Phone { get; init; } = default!;
 }

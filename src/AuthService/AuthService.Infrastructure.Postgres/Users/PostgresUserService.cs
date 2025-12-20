@@ -32,13 +32,15 @@ public sealed class PostgresUserService : IUserService
                 UserName = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Email = user.Email
+                Email = user.Email,
+                Phone = user.Phone
             })
             .ToListAsync(cancellationToken);
 
         return users;
     }
 
+    /// <inheritdoc />
     public async Task<UserResponse?> GetByIdAsync(
         int id,
         CancellationToken cancellationToken)
@@ -58,10 +60,12 @@ public sealed class PostgresUserService : IUserService
             UserName = user.UserName,
             FirstName = user.FirstName,
             LastName = user.LastName,
-            Email = user.Email
+            Email = user.Email,
+            Phone = user.Phone
         };
     }
 
+    /// <inheritdoc />
     public async Task<UserResponse> CreateAsync(
         CreateUserRequest request,
         CancellationToken cancellationToken)
@@ -71,7 +75,8 @@ public sealed class PostgresUserService : IUserService
             UserName = request.UserName,
             FirstName = request.FirstName,
             LastName = request.LastName,
-            Email = request.Email
+            Email = request.Email,
+            Phone = request.Phone
         };
 
         _dbContext.Users.Add(user);
@@ -83,10 +88,12 @@ public sealed class PostgresUserService : IUserService
             UserName = user.UserName,
             FirstName = user.FirstName,
             LastName = user.LastName,
-            Email = user.Email
+            Email = user.Email,
+            Phone = user.Phone
         };
     }
 
+    /// <inheritdoc />
     public async Task<UserResponse?> UpdateAsync(
         int id,
         UpdateUserRequest request,
@@ -100,9 +107,11 @@ public sealed class PostgresUserService : IUserService
             return null;
         }
 
+        user.UserName = request.UserName;
         user.FirstName = request.FirstName;
         user.LastName = request.LastName;
         user.Email = request.Email;
+        user.Phone = request.Phone;
 
         await _dbContext.SaveChangesAsync(cancellationToken);
 
@@ -112,10 +121,12 @@ public sealed class PostgresUserService : IUserService
             UserName = user.UserName,
             FirstName = user.FirstName,
             LastName = user.LastName,
-            Email = user.Email
+            Email = user.Email,
+            Phone = user.Phone
         };
     }
 
+    /// <inheritdoc />
     public async Task<bool> DeleteAsync(
         int id,
         CancellationToken cancellationToken)

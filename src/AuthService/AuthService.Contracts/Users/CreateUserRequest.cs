@@ -27,4 +27,9 @@ public sealed class CreateUserRequest
     [EmailAddress(ErrorMessage = "Некорректный формат E-mail.")]
     [MaxLength(255, ErrorMessage = "Максимальная длина E-mail — 255 символов.")]
     public string Email { get; init; } = default!;
+
+    // Телефон
+    [Required(ErrorMessage = "Телефон обязателен.")]
+    [MaxLength(50, ErrorMessage = "Максимальная длина телефона — 50 символов.")]
+    public string Phone { get; init; } = default!;
 }

@@ -38,6 +38,13 @@ public sealed class User
     /// </summary>
     [Required(ErrorMessage = "Email обязателен.")]
     [EmailAddress(ErrorMessage = "Некорректный формат email.")]
-    [MaxLength(200, ErrorMessage = "Email не должен превышать 200 символов.")]
+    [MaxLength(255, ErrorMessage = "Email не должен превышать 255 символов.")]
     public string Email { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Телефон.
+    /// </summary>
+    [Required(ErrorMessage = "Телефон обязателен.")]
+    [MaxLength(50, ErrorMessage = "Телефон не должен превышать 50 символов.")]
+    public string Phone { get; set; } = string.Empty;
 }

@@ -5,22 +5,20 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0457ECFE-11FF-45E7-B9F0-A640A3D002A7}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		compose.yaml = compose.yaml
+		.env = .env
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{08363347-E14A-4F5D-8DBF-E35952A5FC82}"
 	ProjectSection(SolutionItems) = preProject
-		k8s\deployment.yaml = k8s\deployment.yaml
-		k8s\ingress.yaml = k8s\ingress.yaml
-		k8s\service.yaml = k8s\service.yaml
-		k8s\kustomization.yaml = k8s\kustomization.yaml
-		k8s\namespace.yaml = k8s\namespace.yaml
+		k8s\auth-db-secret.yaml = k8s\auth-db-secret.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HealthService", "HealthService", "{997C4041-1735-4845-B697-697AAD81F5AB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthService.WebApi", "src\HealthService\HealthService.WebApi\HealthService.WebApi.csproj", "{160D1FD6-47C0-4E5C-841E-A2DC0850B6B9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthService", "AuthService", "{40FDC04F-AC53-4425-B342-09B9922DACC9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthServiceOld", "AuthServiceOld", "{40FDC04F-AC53-4425-B342-09B9922DACC9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.WebApi", "src\AuthService\AuthService.WebApi\AuthService.WebApi.csproj", "{0DB679DB-F86E-4E76-974C-2BB108CE5D24}"
 EndProject

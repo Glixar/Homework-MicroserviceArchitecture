@@ -1,0 +1,52 @@
+﻿services:
+  auth-db:
+    image: postgres:16-alpine
+    container_name: auth-db
+    environment:
+      POSTGRES_DB: ${AUTH_POSTGRES_DB:?ENV AUTH_POSTGRES_DB is required}
+      POSTGRES_USER: ${AUTH_POSTGRES_USER:?ENV AUTH_POSTGRES_USER is required}
+      POSTGRES_PASSWORD: ${AUTH_POSTGRES_PASSWORD:?ENV AUTH_POSTGRES_PASSWORD is required}
+    ports:
+      - "25432:5432"
+    volumes:
+      - auth-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB -h 127.0.0.1"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4:9.11.0
+    container_name: auth-pgadmin
+    environment:
+      # учётка для входа в pgAdmin
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:?ENV PGADMIN_DEFAULT_EMAIL is required}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:?ENV PGADMIN_DEFAULT_PASSWORD is required}
+
+      # параметры базы, к которой будет коннектиться pgAdmin
+      AUTH_POSTGRES_DB: ${AUTH_POSTGRES_DB:?ENV AUTH_POSTGRES_DB is required}
+      AUTH_POSTGRES_USER: ${AUTH_POSTGRES_USER:?ENV AUTH_POSTGRES_USER is required}
+      AUTH_POSTGRES_PASSWORD: ${AUTH_POSTGRES_PASSWORD:?ENV AUTH_POSTGRES_PASSWORD is required}
+
+      # сетевые настройки сервера БД для pgAdmin
+      PGADMIN_DEFAULT_SERVER_HOST: ${AUTH_POSTGRES_HOST:?ENV AUTH_POSTGRES_HOST is required}
+      PGADMIN_DEFAULT_SERVER_PORT: ${AUTH_POSTGRES_PORT:?ENV AUTH_POSTGRES_PORT is required}
+
+      # как назвать сервер в дереве pgAdmin
+      PGADMIN_SERVER_NAME: ${PGADMIN_SERVER_NAME:?ENV PGADMIN_SERVER_NAME is required}
+    ports:
+      - "20080:80"
+    depends_on:
+      auth-db:
+        condition: service_healthy
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+      - ./infrastructure/pgadmin/pgadmin-entrypoint.sh:/docker-entrypoint-pgadmin.sh:ro
+    entrypoint: ["/bin/bash", "/docker-entrypoint-pgadmin.sh"]
+    restart: unless-stopped
+
+volumes:
+  auth-db-data:
+  pgadmin-data:

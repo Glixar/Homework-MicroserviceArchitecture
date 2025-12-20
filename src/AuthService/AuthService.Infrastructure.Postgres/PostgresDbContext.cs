@@ -16,7 +16,7 @@ public sealed class PostgresDbContext : DbContext
     }
 
     /// <summary>
-    /// Набор пользователей.
+    /// Пользователи.
     /// </summary>
     public DbSet<User> Users => Set<User>();
 
@@ -25,14 +25,6 @@ public sealed class PostgresDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        ConfigureUsers(modelBuilder);
-    }
-
-    /// <summary>
-    /// Конфигурация сущности пользователя.
-    /// </summary>
-    private static void ConfigureUsers(ModelBuilder modelBuilder)
-    {
         var user = modelBuilder.Entity<User>();
 
         user.ToTable("users");
@@ -45,18 +37,27 @@ public sealed class PostgresDbContext : DbContext
 
         user.Property(x => x.UserName)
             .HasColumnName("user_name")
+            .HasMaxLength(50)
             .IsRequired();
 
         user.Property(x => x.FirstName)
             .HasColumnName("first_name")
+            .HasMaxLength(100)
             .IsRequired();
 
         user.Property(x => x.LastName)
             .HasColumnName("last_name")
+            .HasMaxLength(100)
             .IsRequired();
 
         user.Property(x => x.Email)
             .HasColumnName("email")
+            .HasMaxLength(255)
+            .IsRequired();
+
+        user.Property(x => x.Phone)
+            .HasColumnName("phone")
+            .HasMaxLength(50)
             .IsRequired();
     }
 }

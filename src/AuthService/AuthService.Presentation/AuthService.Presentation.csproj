@@ -2,15 +2,21 @@
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+
+        <!-- Генерируем XML-комментарии для контроллеров -->
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+        <!-- Не засыпать проект ворнингами 1591 "нет XML-комментария" -->
+        <NoWarn>$(NoWarn);1591</NoWarn>
+
         <OutputType>Library</OutputType>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\AuthService.Application\AuthService.Application.csproj" />
         <ProjectReference Include="..\AuthService.Contracts\AuthService.Contracts.csproj" />
+        <ProjectReference Include="..\AuthService.Application\AuthService.Application.csproj" />
     </ItemGroup>
 
 </Project>
-
