@@ -14,23 +14,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{08363347-E14
 		k8s\auth-db-secret.yaml = k8s\auth-db-secret.yaml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HealthService", "HealthService", "{997C4041-1735-4845-B697-697AAD81F5AB}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthService.WebApi", "src\HealthService\HealthService.WebApi\HealthService.WebApi.csproj", "{160D1FD6-47C0-4E5C-841E-A2DC0850B6B9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{997C4041-1735-4845-B697-697AAD81F5AB} = {FF150A4D-F330-4882-B4F0-AC003ED9018D}
-		{160D1FD6-47C0-4E5C-841E-A2DC0850B6B9} = {997C4041-1735-4845-B697-697AAD81F5AB}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{160D1FD6-47C0-4E5C-841E-A2DC0850B6B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{160D1FD6-47C0-4E5C-841E-A2DC0850B6B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{160D1FD6-47C0-4E5C-841E-A2DC0850B6B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{160D1FD6-47C0-4E5C-841E-A2DC0850B6B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
