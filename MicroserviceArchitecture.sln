@@ -10,9 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{08363347-E14A-4F5D-8DBF-E35952A5FC82}"
-	ProjectSection(SolutionItems) = preProject
-		k8s\auth-db-secret.yaml = k8s\auth-db-secret.yaml
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthService", "AuthService", "{CDA3157E-7C2C-4450-816D-1FB53F231F31}"
 EndProject
@@ -30,6 +27,26 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.Presentation", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedKernel", "src\SharedKernel\SharedKernel.csproj", "{88EE6B7F-22D1-48C0-8AFA-42A767DC2567}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Jobs", "Jobs", "{F86797ED-1C6E-451B-8A8E-E026778E8E3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.MigrationsJob", "src\Jobs\AuthService.MigrationsJob\AuthService.MigrationsJob.csproj", "{FC6073A3-9607-41D2-80ED-BDC8135E1311}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "compose", "compose", "{87607FA2-9432-42C7-A93D-B5A25214EAF0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{825AF34A-2568-4D81-A305-F6FF1F8E7115}"
+	ProjectSection(SolutionItems) = preProject
+		compose\services\auth-db.yaml = compose\services\auth-db.yaml
+		compose\services\auth-migrations-job.yaml = compose\services\auth-migrations-job.yaml
+		compose\services\auth-service.yaml = compose\services\auth-service.yaml
+		compose\services\kafka.yaml = compose\services\kafka.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ui", "ui", "{9BCBCD48-0A2E-407F-8B3B-568EF7A13A9F}"
+	ProjectSection(SolutionItems) = preProject
+		compose\ui\pgadmin.yaml = compose\ui\pgadmin.yaml
+		compose\ui\kafka-ui.yaml = compose\ui\kafka-ui.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +61,11 @@ Global
 		{E06D6227-D05A-46C9-BA16-51C7D894DF2A} = {CDA3157E-7C2C-4450-816D-1FB53F231F31}
 		{8061DFF9-F309-4452-AFF8-A35D79BAA468} = {CDA3157E-7C2C-4450-816D-1FB53F231F31}
 		{88EE6B7F-22D1-48C0-8AFA-42A767DC2567} = {FF150A4D-F330-4882-B4F0-AC003ED9018D}
+		{F86797ED-1C6E-451B-8A8E-E026778E8E3C} = {FF150A4D-F330-4882-B4F0-AC003ED9018D}
+		{FC6073A3-9607-41D2-80ED-BDC8135E1311} = {F86797ED-1C6E-451B-8A8E-E026778E8E3C}
+		{87607FA2-9432-42C7-A93D-B5A25214EAF0} = {0457ECFE-11FF-45E7-B9F0-A640A3D002A7}
+		{825AF34A-2568-4D81-A305-F6FF1F8E7115} = {87607FA2-9432-42C7-A93D-B5A25214EAF0}
+		{9BCBCD48-0A2E-407F-8B3B-568EF7A13A9F} = {87607FA2-9432-42C7-A93D-B5A25214EAF0}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{43B41D5D-8704-4D38-A559-8CD63408A469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -74,5 +96,9 @@ Global
 		{88EE6B7F-22D1-48C0-8AFA-42A767DC2567}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88EE6B7F-22D1-48C0-8AFA-42A767DC2567}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88EE6B7F-22D1-48C0-8AFA-42A767DC2567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC6073A3-9607-41D2-80ED-BDC8135E1311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC6073A3-9607-41D2-80ED-BDC8135E1311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC6073A3-9607-41D2-80ED-BDC8135E1311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC6073A3-9607-41D2-80ED-BDC8135E1311}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

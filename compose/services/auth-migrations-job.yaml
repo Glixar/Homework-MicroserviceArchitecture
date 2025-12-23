@@ -1,0 +1,28 @@
+services:
+  auth-migrations-job:
+    build:
+      context: .
+      dockerfile: src/Jobs/AuthService.MigrationsJob/Dockerfile
+      args:
+        CACHE_BUST: "${CACHE_BUST:?Переменная CACHE_BUST обязательна}"
+    depends_on:
+      auth-db:
+        condition: service_healthy
+    environment:
+      ASPNETCORE_ENVIRONMENT: "${AUTH_MIGRATIONS_ENVIRONMENT:?Переменная AUTH_MIGRATIONS_ENVIRONMENT обязательна}"
+      ConnectionStrings__Database: >-
+        Host=${AUTH_POSTGRES_HOST:?Переменная AUTH_POSTGRES_HOST обязательна};
+        Port=${AUTH_POSTGRES_PORT:?Переменная AUTH_POSTGRES_PORT обязательна};
+        Database=${AUTH_POSTGRES_DB:?Переменная AUTH_POSTGRES_DB обязательна};
+        Username=${AUTH_POSTGRES_USER:?Переменная AUTH_POSTGRES_USER обязательна};
+        Password=${AUTH_POSTGRES_PASSWORD:?Переменная AUTH_POSTGRES_PASSWORD обязательна};
+        Search Path=${AUTH_POSTGRES_SEARCH_PATH:?Переменная AUTH_POSTGRES_SEARCH_PATH обязательна};
+        GSS Encryption Mode=${AUTH_POSTGRES_GSS_ENCRYPTION_MODE:?Переменная AUTH_POSTGRES_GSS_ENCRYPTION_MODE обязательна}
+
+      DefaultAdministrator__UserName: "${AUTH_ADMIN_USERNAME:?Переменная AUTH_ADMIN_USERNAME обязательна}"
+      DefaultAdministrator__Email: "${AUTH_ADMIN_EMAIL:?Переменная AUTH_ADMIN_EMAIL обязательна}"
+      DefaultAdministrator__Password: "${AUTH_ADMIN_PASSWORD:?Переменная AUTH_ADMIN_PASSWORD обязательна}"
+
+      Migrations__Migrate: "${AUTH_MIGRATIONS_MIGRATE:?Переменная AUTH_MIGRATIONS_MIGRATE обязательна}"
+      Migrations__Seed: "${AUTH_MIGRATIONS_SEED:?Переменная AUTH_MIGRATIONS_SEED обязательна}"
+    restart: "no"

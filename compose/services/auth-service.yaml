@@ -1,0 +1,26 @@
+services:
+  auth-service:
+    build:
+      context: .
+      dockerfile: src/AuthService/AuthService.WebApi/Dockerfile
+      args:
+        CACHE_BUST: "${CACHE_BUST:?Переменная CACHE_BUST обязательна}"
+    depends_on:
+      auth-db:
+        condition: service_healthy
+      auth-migrations-job:
+        condition: service_completed_successfully
+    environment:
+      ASPNETCORE_ENVIRONMENT: "${AUTH_SERVICE_ENVIRONMENT:?Переменная AUTH_SERVICE_ENVIRONMENT обязательна}"
+      ASPNETCORE_URLS: "${AUTH_SERVICE_URLS:?Переменная AUTH_SERVICE_URLS обязательна}"
+      ConnectionStrings__Database: >-
+        Host=${AUTH_POSTGRES_HOST:?Переменная AUTH_POSTGRES_HOST обязательна};
+        Port=${AUTH_POSTGRES_PORT:?Переменная AUTH_POSTGRES_PORT обязательна};
+        Database=${AUTH_POSTGRES_DB:?Переменная AUTH_POSTGRES_DB обязательна};
+        Username=${AUTH_POSTGRES_USER:?Переменная AUTH_POSTGRES_USER обязательна};
+        Password=${AUTH_POSTGRES_PASSWORD:?Переменная AUTH_POSTGRES_PASSWORD обязательна};
+        Search Path=${AUTH_POSTGRES_SEARCH_PATH:?Переменная AUTH_POSTGRES_SEARCH_PATH обязательна};
+        GSS Encryption Mode=${AUTH_POSTGRES_GSS_ENCRYPTION_MODE:?Переменная AUTH_POSTGRES_GSS_ENCRYPTION_MODE обязательна}
+    ports:
+      - "${AUTH_SERVICE_PUBLISHED_PORT:?Переменная AUTH_SERVICE_PUBLISHED_PORT обязательна}:${AUTH_SERVICE_PORT:?Переменная AUTH_SERVICE_PORT обязательна}"
+    restart: unless-stopped

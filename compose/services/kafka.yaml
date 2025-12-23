@@ -1,0 +1,51 @@
+services:
+  kafka:
+    image: "${KAFKA_IMAGE:?Переменная KAFKA_IMAGE обязательна}"
+    container_name: "${KAFKA_CONTAINER_NAME:?Переменная KAFKA_CONTAINER_NAME обязательна}"
+    hostname: "${KAFKA_HOSTNAME:?Переменная KAFKA_HOSTNAME обязательна}"
+
+    environment:
+      # KRaft (без ZooKeeper). Пример переменных совместим с образом apache/kafka.
+      # См. примеры конфигурации в Docker Docs и Confluent tutorial.
+      CLUSTER_ID: "${KAFKA_CLUSTER_ID:?Переменная KAFKA_CLUSTER_ID обязательна}"
+
+      KAFKA_NODE_ID: "${KAFKA_NODE_ID:?Переменная KAFKA_NODE_ID обязательна}"
+      KAFKA_PROCESS_ROLES: "${KAFKA_PROCESS_ROLES:?Переменная KAFKA_PROCESS_ROLES обязательна}"
+      KAFKA_CONTROLLER_LISTENER_NAMES: "${KAFKA_CONTROLLER_LISTENER_NAMES:?Переменная KAFKA_CONTROLLER_LISTENER_NAMES обязательна}"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "${KAFKA_CONTROLLER_QUORUM_VOTERS:?Переменная KAFKA_CONTROLLER_QUORUM_VOTERS обязательна}"
+
+      # Слушатели (внутри docker-сети и внешний для хоста)
+      KAFKA_LISTENERS: "${KAFKA_LISTENERS:?Переменная KAFKA_LISTENERS обязательна}"
+      KAFKA_ADVERTISED_LISTENERS: "${KAFKA_ADVERTISED_LISTENERS:?Переменная KAFKA_ADVERTISED_LISTENERS обязательна}"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "${KAFKA_LISTENER_SECURITY_PROTOCOL_MAP:?Переменная KAFKA_LISTENER_SECURITY_PROTOCOL_MAP обязательна}"
+      KAFKA_INTER_BROKER_LISTENER_NAME: "${KAFKA_INTER_BROKER_LISTENER_NAME:?Переменная KAFKA_INTER_BROKER_LISTENER_NAME обязательна}"
+
+      # Параметры single-node (для локальной разработки)
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "${KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR:?Переменная KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR обязательна}"
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: "${KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS:?Переменная KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS обязательна}"
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: "${KAFKA_TRANSACTION_STATE_LOG_MIN_ISR:?Переменная KAFKA_TRANSACTION_STATE_LOG_MIN_ISR обязательна}"
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: "${KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR:?Переменная KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR обязательна}"
+
+      # Хранилище данных (KRaft logs)
+      KAFKA_LOG_DIRS: "${KAFKA_LOG_DIRS:?Переменная KAFKA_LOG_DIRS обязательна}"
+
+      # Необязательные настройки — оставлены управляемыми через ENV (без хардкодов)
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "${KAFKA_AUTO_CREATE_TOPICS_ENABLE:?Переменная KAFKA_AUTO_CREATE_TOPICS_ENABLE обязательна}"
+
+    ports:
+      - "${KAFKA_PUBLISHED_PORT:?Переменная KAFKA_PUBLISHED_PORT обязательна}:${KAFKA_PUBLISHED_PORT:?Переменная KAFKA_PUBLISHED_PORT обязательна}"
+
+    volumes:
+      - kafka-data:${KAFKA_LOG_DIRS:?Переменная KAFKA_LOG_DIRS обязательна}
+
+    healthcheck:
+      # Внутри контейнера скрипты Kafka доступны в /opt/kafka/bin (см. Confluent tutorial).
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server 127.0.0.1:${KAFKA_HEALTHCHECK_PORT:?Переменная KAFKA_HEALTHCHECK_PORT обязательна} >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+    restart: unless-stopped
+
+volumes:
+  kafka-data:

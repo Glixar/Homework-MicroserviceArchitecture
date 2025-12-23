@@ -1,0 +1,29 @@
+services:
+  pgadmin:
+    profiles: ["ui"]
+    image: "${PGADMIN_IMAGE:?Переменная PGADMIN_IMAGE обязательна}"
+    container_name: "${PGADMIN_CONTAINER_NAME:?Переменная PGADMIN_CONTAINER_NAME обязательна}"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "${PGADMIN_DEFAULT_EMAIL:?Переменная PGADMIN_DEFAULT_EMAIL обязательна}"
+      PGADMIN_DEFAULT_PASSWORD: "${PGADMIN_DEFAULT_PASSWORD:?Переменная PGADMIN_DEFAULT_PASSWORD обязательна}"
+
+      AUTH_POSTGRES_DB: "${AUTH_POSTGRES_DB:?Переменная AUTH_POSTGRES_DB обязательна}"
+      AUTH_POSTGRES_USER: "${AUTH_POSTGRES_USER:?Переменная AUTH_POSTGRES_USER обязательна}"
+      AUTH_POSTGRES_PASSWORD: "${AUTH_POSTGRES_PASSWORD:?Переменная AUTH_POSTGRES_PASSWORD обязательна}"
+
+      PGADMIN_DEFAULT_SERVER_HOST: "${AUTH_POSTGRES_HOST:?Переменная AUTH_POSTGRES_HOST обязательна}"
+      PGADMIN_DEFAULT_SERVER_PORT: "${AUTH_POSTGRES_PORT:?Переменная AUTH_POSTGRES_PORT обязательна}"
+      PGADMIN_SERVER_NAME: "${PGADMIN_SERVER_NAME:?Переменная PGADMIN_SERVER_NAME обязательна}"
+    ports:
+      - "${PGADMIN_PUBLISHED_PORT:?Переменная PGADMIN_PUBLISHED_PORT обязательна}:${PGADMIN_PORT:?Переменная PGADMIN_PORT обязательна}"
+    depends_on:
+      auth-db:
+        condition: service_healthy
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+      - ./infrastructure/pgadmin/pgadmin-entrypoint.sh:/docker-entrypoint-pgadmin.sh:ro
+    entrypoint: ["/bin/bash", "/docker-entrypoint-pgadmin.sh"]
+    restart: unless-stopped
+
+volumes:
+  pgadmin-data:

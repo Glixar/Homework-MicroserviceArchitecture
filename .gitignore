@@ -150,3 +150,8 @@ azure-pipelines.secret.yml
 artifacts/
 *.artifact
 *.artifact.zip
+
+# JetBrains Rider / ReSharper BuildHost (генерируемые папки)
+BuildHost-*/
+**/BuildHost-*/
+

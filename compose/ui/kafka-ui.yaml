@@ -1,0 +1,22 @@
+services:
+  kafka-ui:
+    profiles: ["ui"]
+    image: "${KAFKA_UI_IMAGE:?Переменная KAFKA_UI_IMAGE обязательна}"
+    container_name: "${KAFKA_UI_CONTAINER_NAME:?Переменная KAFKA_UI_CONTAINER_NAME обязательна}"
+    depends_on:
+      kafka:
+        condition: service_healthy
+
+    environment:
+      # Конфигурация Kafbat UI через ENV.
+      # DYNAMIC_CONFIG_ENABLED лучше держать выключенным по умолчанию (включать осознанно).
+      DYNAMIC_CONFIG_ENABLED: "${KAFKA_UI_DYNAMIC_CONFIG_ENABLED:?Переменная KAFKA_UI_DYNAMIC_CONFIG_ENABLED обязательна}"
+      SERVER_PORT: "${KAFKA_UI_PORT:?Переменная KAFKA_UI_PORT обязательна}"
+
+      KAFKA_CLUSTERS_0_NAME: "${KAFKA_UI_CLUSTER_NAME:?Переменная KAFKA_UI_CLUSTER_NAME обязательна}"
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "${KAFKA_UI_BOOTSTRAP_SERVERS:?Переменная KAFKA_UI_BOOTSTRAP_SERVERS обязательна}"
+
+    ports:
+      - "${KAFKA_UI_PUBLISHED_PORT:?Переменная KAFKA_UI_PUBLISHED_PORT обязательна}:${KAFKA_UI_PORT:?Переменная KAFKA_UI_PORT обязательна}"
+
+    restart: unless-stopped

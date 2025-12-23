@@ -1,0 +1,22 @@
+services:
+  auth-db:
+    image: "${AUTH_POSTGRES_IMAGE:?Переменная AUTH_POSTGRES_IMAGE обязательна}"
+    container_name: "${AUTH_DB_CONTAINER_NAME:?Переменная AUTH_DB_CONTAINER_NAME обязательна}"
+    command: ["postgres", "-p", "${AUTH_POSTGRES_PORT:?Переменная AUTH_POSTGRES_PORT обязательна}"]
+    environment:
+      POSTGRES_DB: "${AUTH_POSTGRES_DB:?Переменная AUTH_POSTGRES_DB обязательна}"
+      POSTGRES_USER: "${AUTH_POSTGRES_USER:?Переменная AUTH_POSTGRES_USER обязательна}"
+      POSTGRES_PASSWORD: "${AUTH_POSTGRES_PASSWORD:?Переменная AUTH_POSTGRES_PASSWORD обязательна}"
+    ports:
+      - "${AUTH_POSTGRES_PUBLISHED_PORT:?Переменная AUTH_POSTGRES_PUBLISHED_PORT обязательна}:${AUTH_POSTGRES_PORT:?Переменная AUTH_POSTGRES_PORT обязательна}"
+    volumes:
+      - auth-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB -h 127.0.0.1 -p ${AUTH_POSTGRES_PORT:?Переменная AUTH_POSTGRES_PORT обязательна}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    restart: unless-stopped
+
+volumes:
+  auth-db-data:
