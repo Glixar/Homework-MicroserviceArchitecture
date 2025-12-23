@@ -65,6 +65,10 @@ public static class DependencyInjection
                 npg.EnableRetryOnFailure();
                 npg.MigrationsHistoryTable("__EFMigrationsHistory", "accounts");
             });
+            
+            
+            // Единый контракт именования для БД (таблицы/колонки/индексы).
+            opt.UseSnakeCaseNamingConvention();
 
 #if DEBUG
             opt.EnableDetailedErrors();

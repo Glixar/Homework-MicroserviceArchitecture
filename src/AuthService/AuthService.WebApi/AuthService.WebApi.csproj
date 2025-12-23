@@ -5,11 +5,12 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>a4d353c4-468a-439b-9635-4a3e4de12171</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.1">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,18 +22,18 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\..\..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+        <Content Include="..\..\..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\SharedKernel\SharedKernel.csproj" />
-      <ProjectReference Include="..\AuthService.Application\AuthService.Application.csproj" />
-      <ProjectReference Include="..\AuthService.Contracts\AuthService.Contracts.csproj" />
-      <ProjectReference Include="..\AuthService.Domain\AuthService.Domain.csproj" />
-      <ProjectReference Include="..\AuthService.Infrastructure.Postgres\AuthService.Infrastructure.Postgres.csproj" />
-      <ProjectReference Include="..\AuthService.Presentation\AuthService.Presentation.csproj" />
+        <ProjectReference Include="..\..\SharedKernel\SharedKernel.csproj" />
+        <ProjectReference Include="..\AuthService.Application\AuthService.Application.csproj" />
+        <ProjectReference Include="..\AuthService.Contracts\AuthService.Contracts.csproj" />
+        <ProjectReference Include="..\AuthService.Domain\AuthService.Domain.csproj" />
+        <ProjectReference Include="..\AuthService.Infrastructure.Postgres\AuthService.Infrastructure.Postgres.csproj" />
+        <ProjectReference Include="..\AuthService.Presentation\AuthService.Presentation.csproj" />
     </ItemGroup>
 
 </Project>
