@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <UserSecretsId>4f91652e-b154-4a8f-8290-012c3bb2bb4a</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="..\..\..\.dockerignore">
+            <Link>.dockerignore</Link>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="EFCore.NamingConventions" Version="10.0.0-rc.2" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.1">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="10.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="10.0.1" />
+        <PackageReference Include="Npgsql" Version="10.0.1" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
+        <PackageReference Include="Polly" Version="8.6.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\AuthService\AuthService.Domain\AuthService.Domain.csproj" />
+        <ProjectReference Include="..\..\AuthService\AuthService.Infrastructure.Postgres\AuthService.Infrastructure.Postgres.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="appsettings.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+</Project>
